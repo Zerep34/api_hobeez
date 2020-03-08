@@ -8,11 +8,11 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/>
 	</parent>
-	<groupId>com.api.java_backent</groupId>
-	<artifactId>go_style</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
-	<name>go_style</name>
-	<description>Go Style api project</description>
+	<groupId>com.api.java_backend</groupId>
+	<artifactId>api_hobeez</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>hobeez</name>
+	<description>Ho'beez api project</description>
 
 	<properties>
 		<java.version>8</java.version>
