@@ -1,6 +1,6 @@
-package com.api.java_backend.go_style.repository;
+package com.api.java_backend.hobeez.repository;
 
-import com.api.java_backend.go_style.model.CouponsByUser;
+import com.api.java_backend.hobeez.model.CouponsByUser;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

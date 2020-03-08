@@ -1,4 +1,4 @@
-package com.api.java_backend.go_style.model;
+package com.api.java_backend.hobeez.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

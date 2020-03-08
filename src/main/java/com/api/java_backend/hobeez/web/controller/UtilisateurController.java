@@ -1,10 +1,9 @@
-package com.api.java_backend.go_style.web.controller;
+package com.api.java_backend.hobeez.web.controller;
 
-import com.api.java_backend.go_style.model.Utilisateurs;
-import com.api.java_backend.go_style.repository.UserRepository;
-import com.api.java_backend.go_style.repository.service.UserService;
+import com.api.java_backend.hobeez.model.Utilisateurs;
+import com.api.java_backend.hobeez.repository.UserRepository;
+import com.api.java_backend.hobeez.repository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 

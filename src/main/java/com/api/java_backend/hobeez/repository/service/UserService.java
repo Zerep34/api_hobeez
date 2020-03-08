@@ -1,6 +1,6 @@
-package com.api.java_backend.go_style.repository.service;
+package com.api.java_backend.hobeez.repository.service;
 
-import com.api.java_backend.go_style.model.Utilisateurs;
+import com.api.java_backend.hobeez.model.Utilisateurs;
 
 public interface UserService {
 

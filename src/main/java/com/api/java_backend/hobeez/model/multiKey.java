@@ -1,4 +1,4 @@
-package com.api.java_backend.go_style.model;
+package com.api.java_backend.hobeez.model;
 
 import java.io.Serializable;
 

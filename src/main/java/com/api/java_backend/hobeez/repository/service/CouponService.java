@@ -1,6 +1,6 @@
-package com.api.java_backend.go_style.repository.service;
+package com.api.java_backend.hobeez.repository.service;
 
-import com.api.java_backend.go_style.model.Coupons;
+import com.api.java_backend.hobeez.model.Coupons;
 
 import java.util.Date;
 

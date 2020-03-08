@@ -1,4 +1,4 @@
-package com.api.java_backend.go_style;
+package com.api.java_backend.hobeez;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

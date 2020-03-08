@@ -1,8 +1,8 @@
-package com.api.java_backend.go_style.web.controller;
+package com.api.java_backend.hobeez.web.controller;
 
-import com.api.java_backend.go_style.model.Coupons;
-import com.api.java_backend.go_style.repository.CouponsRepository;
-import com.api.java_backend.go_style.repository.service.CouponService;
+import com.api.java_backend.hobeez.model.Coupons;
+import com.api.java_backend.hobeez.repository.CouponsRepository;
+import com.api.java_backend.hobeez.repository.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

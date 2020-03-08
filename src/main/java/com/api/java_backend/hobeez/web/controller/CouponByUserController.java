@@ -1,7 +1,7 @@
-package com.api.java_backend.go_style.web.controller;
+package com.api.java_backend.hobeez.web.controller;
 
-import com.api.java_backend.go_style.model.CouponsByUser;
-import com.api.java_backend.go_style.repository.service.CouponByUserService;
+import com.api.java_backend.hobeez.model.CouponsByUser;
+import com.api.java_backend.hobeez.repository.service.CouponByUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

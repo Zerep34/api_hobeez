@@ -1,8 +1,8 @@
-package com.api.java_backend.go_style.repository.implementation;
+package com.api.java_backend.hobeez.repository.implementation;
 
-import com.api.java_backend.go_style.model.Utilisateurs;
-import com.api.java_backend.go_style.repository.UserRepository;
-import com.api.java_backend.go_style.repository.service.UserService;
+import com.api.java_backend.hobeez.model.Utilisateurs;
+import com.api.java_backend.hobeez.repository.UserRepository;
+import com.api.java_backend.hobeez.repository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

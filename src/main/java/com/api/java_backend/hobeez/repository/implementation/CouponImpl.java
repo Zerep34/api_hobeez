@@ -1,8 +1,8 @@
-package com.api.java_backend.go_style.repository.implementation;
+package com.api.java_backend.hobeez.repository.implementation;
 
-import com.api.java_backend.go_style.model.Coupons;
-import com.api.java_backend.go_style.repository.CouponsRepository;
-import com.api.java_backend.go_style.repository.service.CouponService;
+import com.api.java_backend.hobeez.model.Coupons;
+import com.api.java_backend.hobeez.repository.CouponsRepository;
+import com.api.java_backend.hobeez.repository.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

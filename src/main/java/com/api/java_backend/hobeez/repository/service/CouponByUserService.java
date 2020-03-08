@@ -1,7 +1,7 @@
-package com.api.java_backend.go_style.repository.service;
+package com.api.java_backend.hobeez.repository.service;
 
 
-import com.api.java_backend.go_style.model.CouponsByUser;
+import com.api.java_backend.hobeez.model.CouponsByUser;
 
 public interface CouponByUserService {
 
