@@ -6,9 +6,13 @@ import com.api.java_backend.hobeez.repository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @RestController
-@RequestMapping(path="api/user")
+@RequestMapping(path="api/hobeez/user")
 public class UtilisateurController {
 
     @Autowired
@@ -20,8 +24,17 @@ public class UtilisateurController {
     @PostMapping(path="/add")
     public @ResponseBody String addNewUser(@RequestParam String email,
                                            @RequestParam String password,
-                                           @RequestParam String fullname){
-        Utilisateurs u = new Utilisateurs(email, password, fullname);
+                                           @RequestParam String fullname,
+                                           @RequestParam String birthdate,
+                                           @RequestParam String hasChild) throws Exception {
+        Date birth = new SimpleDateFormat("dd/MM/yyyy").parse(birthdate);
+        boolean hasChild_temp;
+        if(hasChild.equals("true")){
+            hasChild_temp = true;
+        }else{
+            hasChild_temp = false;
+        }
+        Utilisateurs u = new Utilisateurs(email, password, fullname, birth, hasChild_temp);
         userService.save(u);
         return "Saved";
     }
@@ -33,7 +46,7 @@ public class UtilisateurController {
 
     @GetMapping(path="/{email}")
     public @ResponseBody
-    Utilisateurs getById(@PathVariable String email){
+    Utilisateurs getById(@PathVariable String email) throws Exception {
         return userService.findByEmail(email);
     }
 
@@ -53,10 +66,19 @@ public class UtilisateurController {
     String update(@RequestParam String email,
                   @RequestParam String password,
                   @RequestParam String fullname,
-                  @PathVariable String oldemail){
+                  @RequestParam String birthdate,
+                  @RequestParam String hasChild,
+                  @PathVariable String oldemail) throws ParseException {
 
+        Date birth = new SimpleDateFormat("dd/MM/yyyy").parse(birthdate);
+        String hasChild_temp;
+        if(hasChild.equals("true")){
+            hasChild_temp = "true";
+        }else{
+            hasChild_temp = "false";
+        }
         if(userRepository.findByEmail(email) != null){
-            userService.update(email, password, fullname, oldemail);
+            userService.update(email, password, fullname, birth, hasChild_temp, oldemail);
             return "Updated";
         }
         else{

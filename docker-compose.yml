@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    container_name: db_container
+    container_name: mysql_hobeez_container
     image: mysql:5.7
     restart: always
     environment:
@@ -26,9 +26,9 @@ services:
   app:
     build: ./
     ports:
-      - "996:8080"
+      - "997:8080"
     depends_on:
-      - db
+      - mysql_hobeez_container
     networks:
       - backend
     restart: always

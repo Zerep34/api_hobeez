@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Date;
+
 public interface UserRepository extends CrudRepository<Utilisateurs, Integer> {
 
     @Query("SELECT u from Utilisateurs u Where u.email=?1")
@@ -15,6 +17,6 @@ public interface UserRepository extends CrudRepository<Utilisateurs, Integer> {
     void deleteByEmail(String email);
 
     @Modifying
-    @Query("Update Utilisateurs Set email=?1, pass=?2, full_name=?3 Where email=?4")
-    void update(String email, String pass, String fullname, String oldEmail);
+    @Query("Update Utilisateurs Set email=?1, pass=?2, full_name=?3, birthdate=?4, hasChild=?5 Where email=?6")
+    void update(String email, String pass, String fullname, Date birthDate, String hasChild, String oldEmail);
 }

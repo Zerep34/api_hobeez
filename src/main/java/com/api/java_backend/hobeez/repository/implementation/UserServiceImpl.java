@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -17,8 +19,12 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public Utilisateurs findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Utilisateurs findByEmail(String email) throws Exception {
+        Utilisateurs u = userRepository.findByEmail(email);
+        if(u != null){
+            return u;
+        }
+        throw new Exception("Not Found");
     }
 
     @Transactional
@@ -26,15 +32,18 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteByEmail(email);
     }
 
-    @Override
     @Transactional
-    public void update(String email, String pass, String fullname, String oldEmail){
-        this.userRepository.update(email,pass, fullname, oldEmail);
+    public void update(String email, String pass, String fullname, Date birthdate, String hasChild, String oldEmail){
+        this.userRepository.update(email,pass, fullname, birthdate, hasChild, oldEmail);
     }
 
     @Override
-    public void save(Utilisateurs user){
+    public Utilisateurs save(Utilisateurs user) throws Exception {
+        if(userRepository.findByEmail(user.getEmail()) != null){
+            throw new Exception("User already exists");
+        }
         this.userRepository.save(user);
+        return user;
     }
 
     @Override

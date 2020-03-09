@@ -3,6 +3,7 @@ package com.api.java_backend.hobeez.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 public class Utilisateurs {
@@ -17,21 +18,21 @@ public class Utilisateurs {
     @NotNull
     private String full_name;
 
-    public Utilisateurs(){}
+    @NotNull
+    private Date birthdate;
 
-    public Utilisateurs(String email, String password, String fullName) {
+    @NotNull
+    private boolean hasChild;
+
+    public Utilisateurs() {
+    }
+
+    public Utilisateurs(String email, String pass, String full_name, Date birthdate, boolean hasChild) {
         this.email = email;
-        this.pass = password;
-        this.full_name = fullName;
-
-    }
-
-    public String getFullName() {
-        return full_name;
-    }
-
-    public void setFullName(String fullName) {
-        this.full_name = fullName;
+        this.pass = pass;
+        this.full_name = full_name;
+        this.birthdate = birthdate;
+        this.hasChild = hasChild;
     }
 
     public String getEmail() {
@@ -42,20 +43,46 @@ public class Utilisateurs {
         this.email = email;
     }
 
-    public String getPassword() {
+    public String getPass() {
         return pass;
     }
 
-    public void setPassword(String password) {
-        this.pass = password;
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public boolean hasChild() {
+        return hasChild;
+    }
+
+    public void setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
     }
 
     @Override
     public String toString() {
         return "Utilisateurs{" +
-                " email='" + email + '\'' +
-                ", password='" + pass + '\'' +
-                ", fullName='" + full_name + '\'' +
+                "email='" + email + '\'' +
+                ", pass='" + pass + '\'' +
+                ", full_name='" + full_name + '\'' +
+                ", birthdate=" + birthdate +
+                ", hasChild=" + hasChild +
                 '}';
     }
 }
