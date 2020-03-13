@@ -1,6 +1,8 @@
 package com.api.java_backend.hobeez.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -10,6 +12,10 @@ public class Utilisateurs {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @NotNull
     private String email;
 
     @NotNull
@@ -19,7 +25,7 @@ public class Utilisateurs {
     private String full_name;
 
     @NotNull
-    private Date birthdate;
+    private Date birthday;
 
     @NotNull
     private boolean hasChild;
@@ -27,11 +33,11 @@ public class Utilisateurs {
     public Utilisateurs() {
     }
 
-    public Utilisateurs(String email, String pass, String full_name, Date birthdate, boolean hasChild) {
+    public Utilisateurs(String email, String pass, String full_name, Date birthday, boolean hasChild) {
         this.email = email;
         this.pass = pass;
         this.full_name = full_name;
-        this.birthdate = birthdate;
+        this.birthday = birthday;
         this.hasChild = hasChild;
     }
 
@@ -60,11 +66,11 @@ public class Utilisateurs {
     }
 
     public Date getBirthdate() {
-        return birthdate;
+        return birthday;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthdate(Date birthday) {
+        this.birthday = birthday;
     }
 
     public boolean hasChild() {
@@ -81,7 +87,7 @@ public class Utilisateurs {
                 "email='" + email + '\'' +
                 ", pass='" + pass + '\'' +
                 ", full_name='" + full_name + '\'' +
-                ", birthdate=" + birthdate +
+                ", birthday=" + birthday +
                 ", hasChild=" + hasChild +
                 '}';
     }

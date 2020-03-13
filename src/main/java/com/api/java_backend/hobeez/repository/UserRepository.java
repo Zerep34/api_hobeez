@@ -17,6 +17,6 @@ public interface UserRepository extends CrudRepository<Utilisateurs, Integer> {
     void deleteByEmail(String email);
 
     @Modifying
-    @Query("Update Utilisateurs Set email=?1, pass=?2, full_name=?3, birthdate=?4, hasChild=?5 Where email=?6")
+    @Query("Update Utilisateurs Set email=?1, pass=?2, full_name=?3, birthday=?4, hasChild=?5 Where email=?6")
     void update(String email, String pass, String fullname, Date birthDate, String hasChild, String oldEmail);
 }

@@ -1,6 +1,6 @@
 version: '3'
 services:
-  db:
+  mysql_hobeez_container:
     container_name: mysql_hobeez_container
     image: mysql:5.7
     restart: always
