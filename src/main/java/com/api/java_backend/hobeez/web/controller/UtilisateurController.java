@@ -15,8 +15,6 @@ import java.util.Date;
 @RequestMapping(path="api/hobeez/user")
 public class UtilisateurController {
 
-    String API_KEY = "AIzaSyCL1grfGNMygaod44vtCJQWZSShgweACY0";
-
     @Autowired
     private UserRepository userRepository;
 
