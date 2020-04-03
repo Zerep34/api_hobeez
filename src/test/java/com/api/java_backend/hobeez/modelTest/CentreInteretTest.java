@@ -1,16 +1,11 @@
 package com.api.java_backend.hobeez.modelTest;
 
 import com.api.java_backend.hobeez.model.CentreInteret;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CentreInteretTest {
 
