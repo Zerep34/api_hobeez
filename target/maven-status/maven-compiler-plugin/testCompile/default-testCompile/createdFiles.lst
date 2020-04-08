@@ -1,0 +1,7 @@
+com/api/java_backend/hobeez/modelTest/MultiKeyTest.class
+com/api/java_backend/hobeez/modelTest/UtilisateurTest.class
+com/api/java_backend/hobeez/modelTest/InteretUtilisateurTest.class
+com/api/java_backend/hobeez/modelTest/CentreInteretTest.class
+com/api/java_backend/hobeez/repositoryTest/CentreInteretRepositoryTest.class
+com/api/java_backend/hobeez/repositoryTest/UserRepositoryTest.class
+com/api/java_backend/hobeez/repositoryTest/InteretUtilisateurTest.class
