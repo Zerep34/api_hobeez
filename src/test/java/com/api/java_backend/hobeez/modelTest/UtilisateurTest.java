@@ -78,10 +78,4 @@ public class UtilisateurTest {
         user.setHasChild(false);
         Assertions.assertFalse(user.hasChild());
     }
-
-    @Test
-    public void testToString(){
-        System.out.println(user.toString());
-        Assertions.assertEquals("Utilisateurs{email='test@mail.com', pass='pass', full_name='test', birthdate=Sat Jan 01 00:00:00 CET 2000, hasChild=true}", user.toString());
-    }
 }
