@@ -67,10 +67,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-    public static void main(String[] args) {
-        String s = "$2y$12$obxj3VgTitSe3hR5/uO22.uQSc4zcrVma8sBlxYHWt/ihQ04Vvmka";
-        String s1 = "$2y$12$nSbtIpISen6MjEU1sdkACuCeOmCDYKTBzuWmzcxwk9KLj3A2MF8l2";
-        System.out.println(s.equals(s1));
-    }
 }
