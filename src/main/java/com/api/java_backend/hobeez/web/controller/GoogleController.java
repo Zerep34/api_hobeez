@@ -1,5 +1,7 @@
 package com.api.java_backend.hobeez.web.controller;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -59,7 +61,7 @@ public class GoogleController {
                     json += inputLine;
                 }
                 in.close();
-                result += json + "--|--";
+                result += json;
             }
             return result;
         }
@@ -130,10 +132,62 @@ public class GoogleController {
                     json += inputLine;
                 }
                 in.close();
-                result += json + "--|--";
+                result += json;
             }
             return result;
         }
     }
+
+    @PostMapping(path="/ghome")
+    public @ResponseBody String google_home (@RequestParam String perimetre,
+                                                @RequestParam String longitude,
+                                                @RequestParam String lattitude,
+                                                @RequestParam String categorie) throws IOException {
+        perimetre = perimetre + "000";
+
+        if(categorie.equals("empty")){ // TODO a voir avec Antoine
+            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&opennow=true&key=%s", lattitude, longitude, perimetre, API_KEY);
+            URL googleapi = new URL(url);
+            URLConnection yc = googleapi.openConnection();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            yc.getInputStream()));
+            String inputLine;
+
+            String json = "";
+
+            while ((inputLine = in.readLine()) != null){
+                json += inputLine;
+            }
+            in.close();
+            JsonObject resultJson = new JsonParser().parse(json).getAsJsonObject();
+            System.out.println(resultJson);
+
+
+            return json;
+
+
+        }
+        else{
+            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&type=%s&opennow=true&key=%s&pagetoken=%s", lattitude, longitude, perimetre, categorie, API_KEY);
+            URL googleapi = new URL(url);
+            URLConnection yc = googleapi.openConnection();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            yc.getInputStream()));
+            String inputLine;
+
+            String json = "";
+
+            while ((inputLine = in.readLine()) != null){
+                json += inputLine;
+            }
+            in.close();
+            return json ;
+        }
+    }
+
 }
 
