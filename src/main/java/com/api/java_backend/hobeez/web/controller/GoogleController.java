@@ -1,5 +1,6 @@
 package com.api.java_backend.hobeez.web.controller;
 
+import com.api.java_backend.hobeez.util.JsonParserUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +10,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(path="api/hobeez/google")
 public class GoogleController {
 
     String API_KEY = "AIzaSyCL1grfGNMygaod44vtCJQWZSShgweACY0";
+
+    private JsonParserUtil jsonParser;
+
+    public GoogleController(){
+        this.jsonParser = new JsonParserUtil();
+    }
 
     @GetMapping(path="/nearby")
     public @ResponseBody String google_nearby (@RequestParam String perimetre,
@@ -161,11 +169,8 @@ public class GoogleController {
                 json += inputLine;
             }
             in.close();
-            JsonObject resultJson = new JsonParser().parse(json).getAsJsonObject();
-            System.out.println(resultJson);
 
-
-            return json;
+            return jsonParser.createJson(json).toString();
 
 
         }
@@ -185,7 +190,7 @@ public class GoogleController {
                 json += inputLine;
             }
             in.close();
-            return json ;
+            return jsonParser.createJson(json).toString();
         }
     }
 
