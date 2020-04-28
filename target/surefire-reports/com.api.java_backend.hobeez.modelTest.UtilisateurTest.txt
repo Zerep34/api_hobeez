@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.api.java_backend.hobeez.modelTest.UtilisateurTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s - in com.api.java_backend.hobeez.modelTest.UtilisateurTest
