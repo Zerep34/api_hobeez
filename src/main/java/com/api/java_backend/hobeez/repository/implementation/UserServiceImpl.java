@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void update(String email, String pass, String fullname, Date birthdate, String hasChild, String oldEmail){
-        this.userRepository.update(email,pass, fullname, birthdate, hasChild, oldEmail);
+    public void update(String email, String pass, String fullname, Date birthdate, String oldEmail){
+        this.userRepository.update(email,pass, fullname, birthdate, oldEmail);
     }
 
     @Override

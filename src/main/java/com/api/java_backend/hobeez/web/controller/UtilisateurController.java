@@ -25,16 +25,9 @@ public class UtilisateurController {
     public @ResponseBody String addNewUser(@RequestParam String email,
                                            @RequestParam String password,
                                            @RequestParam String fullname,
-                                           @RequestParam String birthdate,
-                                           @RequestParam String hasChild) throws Exception {
+                                           @RequestParam String birthdate) throws Exception {
         Date birth = new SimpleDateFormat("dd/MM/yyyy").parse(birthdate);
-        boolean hasChild_temp;
-        if(hasChild.equals("true")){
-            hasChild_temp = true;
-        }else{
-            hasChild_temp = false;
-        }
-        Utilisateurs u = new Utilisateurs(email, password, fullname, birth, hasChild_temp);
+        Utilisateurs u = new Utilisateurs(email, password, fullname, birth);
         userService.save(u);
         return "Saved";
     }
@@ -67,18 +60,11 @@ public class UtilisateurController {
                   @RequestParam String password,
                   @RequestParam String fullname,
                   @RequestParam String birthdate,
-                  @RequestParam String hasChild,
                   @PathVariable String oldemail) throws ParseException {
 
         Date birth = new SimpleDateFormat("dd/MM/yyyy").parse(birthdate);
-        String hasChild_temp;
-        if(hasChild.equals("true")){
-            hasChild_temp = "true";
-        }else{
-            hasChild_temp = "false";
-        }
         if(userRepository.findByEmail(email) != null){
-            userService.update(email, password, fullname, birth, hasChild_temp, oldemail);
+            userService.update(email, password, fullname, birth, oldemail);
             return "Updated";
         }
         else{

@@ -12,7 +12,7 @@ public interface UserService {
 
     void deleteByEmail(String email);
 
-    void update(String email, String pass, String fullname, Date birthDate, String hasChild, String oldEmail);
+    void update(String email, String pass, String fullname, Date birthDate, String oldEmail);
 
     Utilisateurs save(Utilisateurs user) throws Exception;
 

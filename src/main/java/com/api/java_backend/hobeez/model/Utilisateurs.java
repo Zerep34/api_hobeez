@@ -27,18 +27,14 @@ public class Utilisateurs {
     @NotNull
     private Date birthday;
 
-    @NotNull
-    private boolean hasChild;
-
     public Utilisateurs() {
     }
 
-    public Utilisateurs(String email, String pass, String full_name, Date birthday, boolean hasChild) {
+    public Utilisateurs(String email, String pass, String full_name, Date birthday) {
         this.email = email;
         this.pass = pass;
         this.full_name = full_name;
         this.birthday = birthday;
-        this.hasChild = hasChild;
     }
 
     public String getEmail() {
@@ -73,14 +69,6 @@ public class Utilisateurs {
         this.birthday = birthday;
     }
 
-    public boolean hasChild() {
-        return hasChild;
-    }
-
-    public void setHasChild(boolean hasChild) {
-        this.hasChild = hasChild;
-    }
-
     @Override
     public String toString() {
         return "Utilisateurs{" +
@@ -88,7 +76,6 @@ public class Utilisateurs {
                 ", pass='" + pass + '\'' +
                 ", full_name='" + full_name + '\'' +
                 ", birthday=" + birthday +
-                ", hasChild=" + hasChild +
                 '}';
     }
 }
