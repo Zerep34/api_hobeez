@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.api.java_backend.hobeez.repositoryTest.UserRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.398 s - in com.api.java_backend.hobeez.repositoryTest.UserRepositoryTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.39 s - in com.api.java_backend.hobeez.repositoryTest.UserRepositoryTest
