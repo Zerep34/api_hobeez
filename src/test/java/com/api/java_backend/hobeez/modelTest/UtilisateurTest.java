@@ -18,7 +18,7 @@ public class UtilisateurTest {
     @Before
     public void before() throws ParseException {
         this.birthdate = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-        user = new Utilisateurs("test@mail.com", "pass", "test", birthdate, true);
+        user = new Utilisateurs("test@mail.com", "pass", "test", birthdate);
     }
 
     @Test
@@ -66,16 +66,5 @@ public class UtilisateurTest {
         Date birthdate_temp = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2999");
         user.setBirthdate(birthdate_temp);
         Assertions.assertEquals(birthdate_temp, user.getBirthdate());
-    }
-
-    @Test
-    public void testHasChild(){
-        Assertions.assertTrue(user.hasChild());
-    }
-
-    @Test
-    public void testSetHasChild(){
-        user.setHasChild(false);
-        Assertions.assertFalse(user.hasChild());
     }
 }

@@ -40,7 +40,7 @@ class UserRepositoryTest {
     @Test
     public void testFindByEmailPassant() throws Exception {
         Date d = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d, true);
+        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d);
         Mockito.doReturn(test_user).when(userRepository).findByEmail(test_user.getEmail());
         Utilisateurs result = sut.findByEmail(test_user.getEmail());
         Assertions.assertEquals(test_user, result);
@@ -60,7 +60,7 @@ class UserRepositoryTest {
     @Test
     public void testSavePassant() throws Exception {
         Date d = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d, true);
+        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d);
 
         ArgumentCaptor<Utilisateurs> arg_captor_user = ArgumentCaptor.forClass(Utilisateurs.class);
         Mockito.doReturn(null).when(userRepository).save(arg_captor_user.capture());
@@ -71,7 +71,7 @@ class UserRepositoryTest {
     @Test
     public void testSavePassantNonPassant() throws Exception {
         Date d = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d, true);
+        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d);
         Mockito.doReturn(test_user).when(userRepository).findByEmail(test_user.getEmail());
         try {
             sut.save(test_user);
@@ -84,7 +84,7 @@ class UserRepositoryTest {
     @Test
     public void testDelete() throws ParseException {
         Date d = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d, true);
+        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d);
         doNothing().when(userRepository).deleteByEmail(test_user.getEmail());
         sut.deleteByEmail(test_user.getEmail());
         verify(userRepository, times(1)).deleteByEmail(test_user.getEmail());
@@ -93,10 +93,10 @@ class UserRepositoryTest {
     @Test
     public void testUpdatePassant() throws Exception {
         Date d = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2000");
-        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d, true);
-        doNothing().when(userRepository).update(test_user.getEmail(), test_user.getPass(), test_user.getFull_name(), test_user.getBirthdate(), String.valueOf(test_user.hasChild()), test_user.getEmail());
-        sut.update(test_user.getEmail(), test_user.getPass(), test_user.getFull_name(), test_user.getBirthdate(), String.valueOf(test_user.hasChild()), test_user.getEmail());
-        verify(userRepository, times(1)).update(test_user.getEmail(), test_user.getPass(), test_user.getFull_name(), test_user.getBirthdate(), String.valueOf(test_user.hasChild()), test_user.getEmail());
+        Utilisateurs test_user = new Utilisateurs("test", "testpwd", "robert", d);
+        doNothing().when(userRepository).update(test_user.getEmail(), test_user.getPass(), test_user.getFull_name(), test_user.getBirthdate(), test_user.getEmail());
+        sut.update(test_user.getEmail(), test_user.getPass(), test_user.getFull_name(), test_user.getBirthdate(), test_user.getEmail());
+        verify(userRepository, times(1)).update(test_user.getEmail(), test_user.getPass(), test_user.getFull_name(), test_user.getBirthdate(), test_user.getEmail());
     }
 
 
