@@ -3,6 +3,7 @@ package com.api.java_backend.hobeez.web.controller;
 import com.api.java_backend.hobeez.util.JsonParserUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -76,6 +77,7 @@ public class GoogleController {
     }
 
     @GetMapping(path="/details")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody String google_details (@RequestParam String place_id) throws IOException {
         String url = String.format("https://maps.googleapis.com/maps/api/place/details/json?place_id=%s&fields=address_component,adr_address,formatted_address,geometry,icon,name,plus_code,type,formatted_phone_number,opening_hours,website,price_level,rating&key=%s", place_id, API_KEY);
         URL googleapi = new URL(url);
@@ -96,6 +98,7 @@ public class GoogleController {
     }
 
     @GetMapping(path="/refresh")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody String google_details (@RequestParam String perimetre,
                                                 @RequestParam String longitude,
                                                 @RequestParam String lattitude,
@@ -194,5 +197,10 @@ public class GoogleController {
         }
     }
 
+    @GetMapping(path="/test")
+    @PreAuthorize("hasRole('GHOME')")
+    public @ResponseBody String test(){
+        return "test";
+    }
 }
 

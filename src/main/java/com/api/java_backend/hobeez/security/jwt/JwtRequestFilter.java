@@ -4,6 +4,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -44,22 +45,29 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
             }
         } else {
-            if(requestTokenHeader.equals("1fccda0b53e3d7327c4abbde63b0561175add4f6a73c8f7a41874abafde7a3bf")){
-                Set<GrantedAuthority> grantedAuthority = new HashSet<>();
-                JwtTokenUtil tokenUtil = new JwtTokenUtil();
-                Map<String, Object> map = new HashMap<>();
-                map.put("test", "test");
-                UsernamePasswordAuthenticationToken  user = new UsernamePasswordAuthenticationToken(tokenUtil.doGenerateToken(map, "auto"), null, grantedAuthority);
-                SecurityContextHolder.getContext().setAuthentication(user);
-                return;
+            if (requestTokenHeader != null) {
+                if (requestTokenHeader.equals("1fccda0b53e3d7327c4abbde63b0561175add4f6a73c8f7a41874abafde7a3bf")) {
+                    Set<GrantedAuthority> grantedAuthority = new HashSet<>();
+                    grantedAuthority.add(new SimpleGrantedAuthority("ROLE_GHOME"));
+                    JwtTokenUtil tokenUtil = new JwtTokenUtil();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("test", "test");
+                    UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(tokenUtil.doGenerateToken(map, "auto"), null, grantedAuthority);
+                    user.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(user);
+                    chain.doFilter(request, response);
+                    return;
+                }
             }
         }        // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);            // if token is valid configure Spring Security to manually set
             // authentication
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+                Set<GrantedAuthority> grantedAuthority = new HashSet<>();
+                grantedAuthority.add(new SimpleGrantedAuthority("ROLE_USER"));
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
+                        userDetails, null, grantedAuthority);
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 // After setting the Authentication in the context, we specify
