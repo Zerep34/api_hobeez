@@ -26,6 +26,7 @@ public class GoogleController {
     }
 
     @GetMapping(path="/nearby")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody String google_nearby (@RequestParam String perimetre,
                                                @RequestParam String longitude,
                                                @RequestParam String lattitude,
@@ -150,6 +151,7 @@ public class GoogleController {
     }
 
     @PostMapping(path="/ghome")
+    @PreAuthorize("hasRole('GHOME')")
     public @ResponseBody String google_home (@RequestParam String perimetre,
                                                 @RequestParam String longitude,
                                                 @RequestParam String lattitude,
@@ -195,12 +197,6 @@ public class GoogleController {
             in.close();
             return jsonParser.createJson(json).toString();
         }
-    }
-
-    @GetMapping(path="/test")
-    @PreAuthorize("hasRole('GHOME')")
-    public @ResponseBody String test(){
-        return "test";
     }
 }
 

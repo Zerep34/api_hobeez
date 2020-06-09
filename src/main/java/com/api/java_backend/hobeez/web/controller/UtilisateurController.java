@@ -4,6 +4,7 @@ import com.api.java_backend.hobeez.model.Utilisateurs;
 import com.api.java_backend.hobeez.repository.UserRepository;
 import com.api.java_backend.hobeez.repository.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -22,6 +23,7 @@ public class UtilisateurController {
     private UserService userService;
 
     @PostMapping(path="/add")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody String addNewUser(@RequestParam String email,
                                            @RequestParam String password,
                                            @RequestParam String fullname,
@@ -33,17 +35,20 @@ public class UtilisateurController {
     }
 
     @GetMapping(path = "/all")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody Iterable<Utilisateurs> getAllUsers(){
         return userRepository.findAll();
     }
 
     @GetMapping(path="/{email}")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody
     Utilisateurs getById(@PathVariable String email) throws Exception {
         return userService.findByEmail(email);
     }
 
     @DeleteMapping(value = "/delete/{email}")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody String delete(@PathVariable String email){
         if(userRepository.findByEmail(email) != null){
             userService.deleteByEmail(email);
@@ -55,6 +60,7 @@ public class UtilisateurController {
     }
 
     @PutMapping(path="/update/{oldemail}")
+    @PreAuthorize("hasRole('USER')")
     public @ResponseBody
     String update(@RequestParam String email,
                   @RequestParam String password,
