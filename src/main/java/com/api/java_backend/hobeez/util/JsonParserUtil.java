@@ -49,7 +49,7 @@ public class JsonParserUtil {
         String phrase = "L'activité se trouve à " + liste.get(rand)[2] + ", le nom de l'activité est " + liste.get(rand)[0] +
                 " elle a une note de " + liste.get(rand)[1] + " sur Google";
 
-        String json = String.format("{\"textToSpeech\": \"%s\"}", phrase);
+        String json = String.format("{\"fulfillmentText\": \"%s\"}", phrase);
 
         System.out.println(json);
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
