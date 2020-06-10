@@ -1,5 +1,7 @@
 #! /bin/bash
 
+sudo rm -rf target
+
 sudo docker-compose stop
 
 git pull
