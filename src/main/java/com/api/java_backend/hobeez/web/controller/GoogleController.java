@@ -64,12 +64,12 @@ public class GoogleController {
     public @ResponseBody
     String google_nearby(@RequestParam String perimetre,
                          @RequestParam String longitude,
-                         @RequestParam String lattitude,
+                         @RequestParam String latitude,
                          @RequestParam String l_type_raw) throws IOException {
         perimetre = perimetre + "000";
 
         if (l_type_raw.equals("empty")) {
-            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&key=%s", lattitude, longitude, perimetre, API_KEY);
+            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&key=%s", latitude, longitude, perimetre, API_KEY);
             System.out.println(url);
             URL googleapi = new URL(url);
             URLConnection yc = googleapi.openConnection();
@@ -91,7 +91,7 @@ public class GoogleController {
             String result = "";
             String[] l_type = l_type_raw.split(",");
             for (String type: l_type) {
-                String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&type=%s&opennow=true&key=%s&opennow=true", lattitude, longitude, perimetre, type, API_KEY);
+                String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&type=%s&opennow=true&key=%s&opennow=true", latitude, longitude, perimetre, type, API_KEY);
                 URL googleapi = new URL(url);
                 URLConnection yc = googleapi.openConnection();
 
@@ -135,15 +135,15 @@ public class GoogleController {
 
     @GetMapping(path="/refresh")
     @PreAuthorize("hasRole('USER')")
-    public @ResponseBody String google_details (@RequestParam String perimetre,
-                                                @RequestParam String longitude,
-                                                @RequestParam String lattitude,
-                                                @RequestParam String l_type_raw,
-                                                @RequestParam String refresh_token) throws IOException {
+    public @ResponseBody String google_details(@RequestParam String perimetre,
+                                               @RequestParam String longitude,
+                                               @RequestParam String latitude,
+                                               @RequestParam String l_type_raw,
+                                               @RequestParam String refresh_token) throws IOException {
         perimetre = perimetre + "000";
 
         if(l_type_raw.equals("empty")){
-            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&opennow=true&key=%s", lattitude, longitude, perimetre, API_KEY, refresh_token);
+            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&opennow=true&key=%s", latitude, longitude, perimetre, API_KEY, refresh_token);
             URL googleapi = new URL(url);
             URLConnection yc = googleapi.openConnection();
 
@@ -164,7 +164,7 @@ public class GoogleController {
             String result = "";
             String[] l_type = l_type_raw.split(",");
             for (String type: l_type) {
-                String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&type=%s&opennow=true&key=%s&pagetoken=%s", lattitude, longitude, perimetre, type, API_KEY);
+                String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&type=%s&opennow=true&key=%s&pagetoken=%s", latitude, longitude, perimetre, type, API_KEY);
                 URL googleapi = new URL(url);
                 URLConnection yc = googleapi.openConnection();
 
@@ -199,12 +199,12 @@ public class GoogleController {
 
         String categorie = this.search_in_map(params_from_json[2]);
         String[] coord = this.getCoordinateFromCity(params_from_json[0]);
-        String lattitude = coord[1];
+        String latitude = coord[1];
         String longitude = coord[0];
 
 
         if (categorie.equals("empty")) { // TODO a voir avec Antoine
-            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&opennow=true&key=%s", lattitude, longitude, perimetre, API_KEY);
+            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&opennow=true&key=%s", latitude, longitude, perimetre, API_KEY);
             URL googleapi = new URL(url);
             URLConnection yc = googleapi.openConnection();
 
@@ -226,7 +226,7 @@ public class GoogleController {
 
         }
         else{
-            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&type=%s&opennow=true&key=%s", lattitude, longitude, perimetre, categorie, API_KEY);
+            String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&type=%s&opennow=true&key=%s", latitude, longitude, perimetre, categorie, API_KEY);
             URL googleapi = new URL(url);
             URLConnection yc = googleapi.openConnection();
 
