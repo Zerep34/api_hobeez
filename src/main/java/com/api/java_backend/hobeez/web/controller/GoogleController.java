@@ -27,7 +27,7 @@ public class GoogleController {
     private JsonParserUtil jsonParser;
 
     public GoogleController() {
-        this.jsonParser = new JsonParserUtil();
+        jsonParser = new JsonParserUtil();
     }
 
     Map<String, String> map_categorie = new HashMap<>();
@@ -67,7 +67,10 @@ public class GoogleController {
                          @RequestParam String latitude,
                          @RequestParam String l_type_raw) throws IOException {
         perimetre = perimetre + "000";
-
+        l_type_raw = this.search_in_map(l_type_raw);
+        if (l_type_raw == null) {
+            l_type_raw = "empty";
+        }
         if (l_type_raw.equals("empty")) {
             String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&key=%s", latitude, longitude, perimetre, API_KEY);
             System.out.println(url);
@@ -141,8 +144,11 @@ public class GoogleController {
                                                @RequestParam String l_type_raw,
                                                @RequestParam String refresh_token) throws IOException {
         perimetre = perimetre + "000";
-
-        if(l_type_raw.equals("empty")){
+        l_type_raw = this.search_in_map(l_type_raw);
+        if (l_type_raw == null) {
+            l_type_raw = "empty";
+        }
+        if (l_type_raw.equals("empty")) {
             String url = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=%s&opennow=true&key=%s", latitude, longitude, perimetre, API_KEY, refresh_token);
             URL googleapi = new URL(url);
             URLConnection yc = googleapi.openConnection();
@@ -198,6 +204,9 @@ public class GoogleController {
         }
 
         String categorie = this.search_in_map(params_from_json[2]);
+        if (categorie == null) {
+            categorie = "empty";
+        }
         String[] coord = this.getCoordinateFromCity(params_from_json[0]);
         String latitude = coord[1];
         String longitude = coord[0];
@@ -277,9 +286,39 @@ public class GoogleController {
         String result = s.hasNext() ? s.next() : "";
         JsonParser parser = new com.google.gson.JsonParser();
         String json_features = parser.parse(result).getAsJsonObject().get("features").toString();
-        String coordinates = json_features.substring(json_features.indexOf("coordinates")+14, json_features.indexOf("]"));
+        String coordinates = json_features.substring(json_features.indexOf("coordinates") + 14, json_features.indexOf("]"));
 
         return coordinates.split(",");
+    }
+
+    public static void main(String[] args) {
+        Map<String, String> map_categorie = new HashMap<>();
+        map_categorie.put("Sport", "gym");
+        map_categorie.put("Cinema", "movie_theater");
+        map_categorie.put("Casino", "casino");
+        map_categorie.put("Boite", "night_club");
+        map_categorie.put("Bar", "bar");
+        map_categorie.put("Beauté", "beauty_salon");
+        map_categorie.put("Librairie", "library");
+        map_categorie.put("Magasin", "supermarket");
+        map_categorie.put("Art", "art_gallery");
+        map_categorie.put("Restauration", "restaurant");
+        map_categorie.put("Eglise", "church");
+        map_categorie.put("Mosquée", "mosque");
+        map_categorie.put("Synagogue", "synagogue");
+        map_categorie.put("Parc", "park");
+        map_categorie.put("Coiffeur", "hair_care");
+        map_categorie.put("Musée", "museum");
+        map_categorie.put("Zoo", "zoo");
+        map_categorie.put("Spa", "spa");
+        map_categorie.put("Stade", "stadium");
+        map_categorie.put("Parc de jeux", "amusement_park");
+        map_categorie.put("Bowling", "bowling_alley");
+        map_categorie.put("Café", "cafe");
+        map_categorie.put("Shopping", "shopping_mall");
+        if (map_categorie.get("t") == null) {
+            System.out.println("t");
+        }
     }
 
 }
