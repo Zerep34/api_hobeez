@@ -4,54 +4,64 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JsonParserUtil {
 
-    public ArrayList<String[]> getElementFromJson(String reponse){
+    public ArrayList<Map<String, String>> getElementFromJson(String reponse) {
         JsonObject resultJson = new com.google.gson.JsonParser().parse(reponse).getAsJsonObject();
         String results = resultJson.get("results").toString();
 
         String[] split_list = results.split(",\"");
 
-        ArrayList<String[]> l_reponse = new ArrayList<>();
-        String[] t = new String[3];
+        ArrayList<Map<String, String>> l_reponse = new ArrayList<>();
+        Map<String, String> map = new HashMap<>();
         int compt = 0;
-        for (String s: split_list) {
-            System.out.println(s);
-            if (s.contains("name") || s.contains("vicinity") || s.contains("rating\":")){
-                if(s.contains("name")) {
-                    s = s.replace("name\":\"","");
-                    s = s.substring(0, s.length()-1);
-                }
-                else if(s.contains("vicinity")){
-                    s = s.replace("vicinity\":\"","");
+        for (String s : split_list) {
+            if (s.contains("name") || s.contains("vicinity") || s.contains("rating\":")) {
+                if (s.contains("name")) {
+                    s = s.replace("name\":\"", "");
+                    s = s.substring(0, s.length() - 1);
+                    map.put("nom", s);
+                } else if (s.contains("vicinity")) {
+                    s = s.replace("vicinity\":\"", "");
                     s = s.substring(0, s.indexOf("\""));
-                }
-                else{
+                    map.put("adresse", s);
+                } else {
                     s = s.replace("rating\":", "");
+                    map.put("note", s);
                 }
-                t[compt] = s;
+
                 compt++;
-                if(compt == 3){
+                if (compt == 3) {
                     compt = 0;
-                    l_reponse.add(t);
+                    l_reponse.add(map);
+                    map = new HashMap<>();
                 }
             }
         }
         return l_reponse;
     }
 
-    public JsonObject createJson(String reponse){
-        ArrayList<String[]> liste = this.getElementFromJson(reponse);
+    public JsonObject createJson(String response) {
+        String phrase;
 
-        int rand = (int) Math.random() * ( liste.size() );
+        if (!response.contains("ZERO_RESULTS")) {
+            ArrayList<Map<String, String>> liste = this.getElementFromJson(response);
 
-        String phrase = "L'activité se trouve à " + liste.get(rand)[2] + ", le nom de l'activité est " + liste.get(rand)[0] +
-                " elle a une note de " + liste.get(rand)[1] + " sur Google";
+
+            int rand = (int) (Math.random() * (liste.size()));
+
+
+            phrase = "L'activité se trouve au " + liste.get(rand).get("adresse") + ", le nom de l'activité est " + liste.get(rand).get("nom") +
+                    " et elle a une note de " + liste.get(rand).get("note") + " sur Google";
+        } else {
+            phrase = "Aucune activité n'a été trouvée pour les paramètres donnés.";
+        }
 
         String json = String.format("{\"fulfillmentText\": \"%s\"}", phrase);
 
-        System.out.println(json);
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
 
         return jsonObject;
